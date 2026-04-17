@@ -1,21 +1,33 @@
 from extractor import extract_data
 from transform import clean_data
 from load import load_to_db
+from validation import validate_data
+from logger import get_logger
 
 def run_pipeline():
-    import logging
+    logger = get_logger()
+    
+    try:
+        logger.info("Starting ETL pipeline")
 
-    logging.basicConfig(level=logging.INFO)
-    logging.info("Starting ETL pipeline")
-    # Step 1: Extract
-    df = extract_data("./data/jobs_raw.csv")
+        df = extract_data()
+        logger.info(f"Extracted {len(df)} records")
 
-    # Step 2: Transform
-    cleaned_df = clean_data(df)
+        df_clean = clean_data(df)
+        logger.info("Data transformation complete")
 
-    # Step 3: Load
-    load_to_db(cleaned_df)
-    print("ETL pipeline executed successfully.")
+        validate_data(df_clean)
+        logger.info("Data validation passed")
+
+        load_to_db(df_clean)
+        logger.info("Data loaded into database")
+
+        logger.info("ETL pipeline completed successfully")
+
+    except Exception as e:
+        logger.error(f"Pipeline failed: {e}")
+        raise
+
 
 if __name__ == "__main__":
     try:

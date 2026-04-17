@@ -1,16 +1,24 @@
-import sqlite3
+from sqlalchemy import text
+from db import get_engine
 
 def run_queries():
-    conn = sqlite3.connect("jobs.db")
-    cursor = conn.cursor()
+    engine = get_engine()
 
-    query = "SELECT COUNT(*) FROM jobs"
-    cursor.execute(query)
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT COUNT(*) FROM jobs"))
+        print("Total records:", result.scalar())
 
-    result = cursor.fetchone()
-    print("Total records:", result[0])
+        result = conn.execute(text("""
+            SELECT job_title, COUNT(*) as count
+            FROM jobs
+            GROUP BY job_title
+            ORDER BY count DESC
+            LIMIT 5
+        """))
 
-    conn.close()
+        print("Top job roles:")
+        for row in result:
+            print(row)
 
 if __name__ == "__main__":
     run_queries()
