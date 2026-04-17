@@ -1,9 +1,10 @@
 import pandas as pd
+from config import DATA_PATH
 
-def extract_data(file_path):
-    df = pd.read_csv(file_path)
+def extract_data():
+    df = pd.read_csv(DATA_PATH)
     return df
 
 if __name__ == "__main__":
-    df = extract_data("./data/jobs_raw.csv")
+    df = extract_data()
     print(df.head())

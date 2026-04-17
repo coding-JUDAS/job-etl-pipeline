@@ -3,6 +3,10 @@ from transform import clean_data
 from load import load_to_db
 
 def run_pipeline():
+    import logging
+
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Starting ETL pipeline")
     # Step 1: Extract
     df = extract_data("./data/jobs_raw.csv")
 
@@ -14,4 +18,7 @@ def run_pipeline():
     print("ETL pipeline executed successfully.")
 
 if __name__ == "__main__":
-    run_pipeline()
+    try:
+     run_pipeline()
+    except Exception as e:
+        print(f"Pipeline failed: {e}")

@@ -12,7 +12,8 @@ def clean_data(df):
 
     # Example: clean salary column if exists
     if "salary" in df.columns:
-        df["salary"] = df["salary"].astype(str).str.replace(",", "")
+        df["salary"] = df["salary"].str.replace(",", "").astype(float)
+        df["job_title"] = df["job_title"].str.lower().str.strip()
     # Convert salary to numeric (example: remove currency symbols and commas)
     #df['salary'] = df['salary'].replace('[\$,]', '', regex=True).astype(float)
     

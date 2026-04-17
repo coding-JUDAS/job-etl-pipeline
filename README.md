@@ -1,8 +1,13 @@
 # Job Market ETL Pipeline (US)
 
 ## Overview
-This project implements an end-to-end ETL pipeline that extracts raw job market data, transforms it into a clean format, and loads it into a structured SQL database for analysis.
+This project implements an end-to-end ETL (Extract, Transform, Load) pipeline that processes raw job market data into a structured, queryable database.
 
+## Architecture
+Raw Data → Extract → Transform → Load → SQL Database → Query
+
+
+The pipeline demonstrates real-world data engineering workflows including data cleaning, transformation, and database integration.
 ## Tech Stack
 - Python (pandas)
 - SQL (SQLite)
