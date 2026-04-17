@@ -4,6 +4,7 @@
 This project implements an end-to-end ETL (Extract, Transform, Load) pipeline that processes raw job market data into a structured, queryable database.
 
 ## Architecture
+ETL pipeline with validation and logging layers
 Raw Data → Extract → Transform → Load → SQL Database → Query
 
 
@@ -24,6 +25,16 @@ The pipeline demonstrates real-world data engineering workflows including data c
 - Automated pipeline execution
 - Structured database storage
 - Query-ready dataset
+- Config-driven pipeline
+- Data validation checks
+- Logging system
+- Modular architecture
+- SQL database integration
+
+## Future Improvements
+- Airflow orchestration
+- Cloud deployment (AWS)
+- API-based data ingestion
 
 ## How to Run
 ```bash
